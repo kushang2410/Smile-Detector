@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import * as faceapi from 'face-api.js';
 import { toast } from 'react-toastify';
 
-function SmileCapture({ addImage }) {
+const SmileCapture = ({ addImage }) => {
   const videoRef = useRef(null);
   const isModelLoaded = useRef(false);
   const streamRef = useRef(null);
@@ -96,6 +96,6 @@ function SmileCapture({ addImage }) {
       </button>
     </div>
   );
-}
+};
 
 export default SmileCapture;
