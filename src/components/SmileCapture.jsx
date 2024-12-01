@@ -17,7 +17,8 @@ function SmileCapture({ addImage }) {
         isModelLoaded.current = true;
         console.log('Models loaded successfully');
       } catch (error) {
-        console.error('Error loading models:', error);
+        toast.error('Error loading models. Please try again later.');
+        console.error(error);
       }
     };
     loadModels();
@@ -32,7 +33,8 @@ function SmileCapture({ addImage }) {
       setIsCameraOn(true);
       console.log('Camera started successfully');
     } catch (error) {
-      console.error('Error starting camera:', error);
+      toast.error('Error accessing camera. Check permissions.');
+      console.error(error);
     }
   };
 
@@ -47,7 +49,7 @@ function SmileCapture({ addImage }) {
 
   const captureSmile = async () => {
     if (!isModelLoaded.current) {
-      toast('Model not loaded yet. Please wait.');
+      toast.info('Model not loaded yet. Please wait.');
       return;
     }
 
@@ -57,12 +59,7 @@ function SmileCapture({ addImage }) {
     canvas.getContext('2d').drawImage(videoRef.current, 0, 0);
 
     try {
-      const detection = await faceapi
-        .detectSingleFace(canvas)
-        .withFaceExpressions();
-
-      console.log('Detection result:', detection);
-
+      const detection = await faceapi.detectSingleFace(canvas).withFaceExpressions();
       if (detection) {
         const { happy, angry } = detection.expressions;
 
@@ -75,10 +72,11 @@ function SmileCapture({ addImage }) {
           addImage(canvas.toDataURL(), false, false);
         }
       } else {
-        toast('No face detected. Try again.');
+        toast.warning('No face detected. Try again.');
       }
     } catch (error) {
-      console.error('Error detecting smile:', error);
+      toast.error('Error detecting face.');
+      console.error(error);
     }
   };
 
