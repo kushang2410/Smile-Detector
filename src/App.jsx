@@ -4,7 +4,7 @@ import SmilePosts from './components/SmilePosts';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function App() {
+const App = () => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
@@ -46,6 +46,6 @@ function App() {
       <SmilePosts images={images} deleteImage={deleteImage} />
     </div>
   );
-}
+};
 
 export default App;
