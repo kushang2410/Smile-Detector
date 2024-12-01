@@ -1,6 +1,6 @@
 import React from 'react';
 
-function SmilePosts({ images, deleteImage }) {
+const SmilePosts = ({ images, deleteImage }) => {
   if (images.length === 0) return <p className="my-3">No smiles captured yet!</p>;
 
   return (
@@ -30,6 +30,6 @@ function SmilePosts({ images, deleteImage }) {
       ))}
     </div>
   );
-}
+};
 
 export default SmilePosts;
